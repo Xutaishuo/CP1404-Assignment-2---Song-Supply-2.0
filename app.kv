@@ -1,2 +1,93 @@
 # TODO: Create your Kivy layout in the kv language here
+#:import Button kivy.uix.button.Button
+
 BoxLayout:
+    orientation: "vertical"
+    size_hint: 1, 1
+
+
+    BoxLayout:
+        size_hint_y: 0.1
+        Label:
+            text: "Song Supply 2.0"
+
+
+    BoxLayout:
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.25
+
+            Spinner:
+                id: sort_spinner
+                text: "Artist"
+                values: ("Artist", "Title", "Year")
+                size_hint_y: 0.1
+                on_text: app.sort_songs()
+
+            Label:
+                text: "Add New Song"
+                size_hint_y: 0.1
+
+            Label:
+                text: "Title"
+                size_hint_y: 0.1
+
+            TextInput:
+                id: title_input
+                multiline: False
+                write_tab: False
+                size_hint_y: 0.1
+
+            Label:
+                text: "Artist"
+                size_hint_y: 0.1
+
+            TextInput:
+                id: artist_input
+                multiline: False
+                write_tab: False
+                size_hint_y: 0.1
+
+            Label:
+                text: "Year"
+                size_hint_y: 0.1
+
+            TextInput:
+                id: year_input
+                multiline: False
+                write_tab: False
+                size_hint_y: 0.1
+
+            Button:
+                text: "Add Song"
+                size_hint_y: 0.1
+                on_release: app.add_song()
+
+            Button:
+                text: "Clear"
+                size_hint_y: 0.1
+                on_release: app.clear_inputs()
+
+        # 右侧歌曲列表区
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.75
+
+            Label:
+                id: count_label
+                text: "0 songs to learn, 0 songs learned"
+                size_hint_y: 0.1
+
+            ScrollView:
+                size_hint_y: 0.8
+                BoxLayout:
+                    id: songs_layout
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+
+            Label:
+                id: status_label
+                text: ""
+                size_hint_y: 0.1
