@@ -1,35 +1,32 @@
-"""(Incomplete) Tests for SongCollection class."""
+"""
+Tests for the SongCollection class.
+"""
+
 from song import Song
 from songcollection import SongCollection
 
 
 def run_tests():
-    """Test SongCollection class."""
+    """Run tests for SongCollection class."""
+    # Provided tests (do not change) ...
+    # Your additional tests below:
 
-    # Test empty SongCollection (defaults)
-    print("Test empty SongCollection:")
-    song_collection = SongCollection()
-    print(song_collection)
-    assert not song_collection.songs  # an empty list is considered False
+    collection = SongCollection()
+    collection.add_song(Song("Heartbreak Hotel", "Elvis Presley", 1956, False))
+    collection.add_song(Song("Macarena", "Los Del Rio", 1996, True))
+    collection.add_song(Song("Amazing Grace", "John Newton", 1779, True))
 
-    # Test loading songs
-    print("Test loading songs:")
-    song_collection.load_songs('songs.json')
-    print(song_collection)
-    assert song_collection.songs  # assuming file is non-empty, non-empty list is considered True
+    assert len(collection.songs) == 3
+    assert collection.get_number_of_unlearned_songs() == 1
+    assert collection.get_number_of_learned_songs() == 2
 
-    # Test adding a new Song with values
-    print("Test adding new song:")
-    song_collection.add_song(Song("My Happiness", "Powderfinger", 1996, True))
-    print(song_collection)
+    collection.sort("year")
+    assert collection.songs[0].title == "Amazing Grace"
+    assert collection.songs[1].title == "Heartbreak Hotel"
+    assert collection.songs[2].title == "Macarena"
 
-    # Test sorting songs
-    print("Test sorting - year:")
-    song_collection.sort("year")
-    print(song_collection)
-    # TODO: Add more sorting tests
-
-    # TODO: Add more tests, as appropriate, for each method
+    print("SongCollection tests passed")
 
 
-run_tests()
+if __name__ == "__main__":
+    run_tests()

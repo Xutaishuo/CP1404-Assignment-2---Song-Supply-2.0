@@ -1,24 +1,35 @@
-"""(Incomplete) Tests for Song class."""
+"""
+Tests for the Song class.
+"""
+
 from song import Song
 
 
 def run_tests():
-    """Test Song class."""
+    """Run tests for Song class."""
+    # Provided tests (do not change) ...
+    # Your additional tests below:
 
-    # Test empty song (defaults)
-    print("Test empty song:")
-    default_song = Song()
-    print(default_song)
-    assert default_song.artist == ""
-    assert default_song.title == ""
-    assert default_song.year == 0
-    assert default_song.is_learned is False
+    song = Song("Heartbreak Hotel", "Elvis Presley", 1956, False)
 
-    # Test initial-value song
-    initial_song = Song("My Happiness", "Powderfinger", 1996, True)
-    # TODO: Write tests to show this initialisation works
+    # Test __str__
+    assert str(song) == "Heartbreak Hotel by Elvis Presley (1956)"
 
-    # TODO: Add more tests, as appropriate, for each method
+    # Test is_classic
+    assert song.is_classic() is True
+    classic_song = Song("Amazing Grace", "John Newton", 1779, True)
+    assert classic_song.is_classic() is True
+    modern_song = Song("Macarena", "Los Del Rio", 1996, True)
+    assert modern_song.is_classic() is False
+
+    # Test mark_learned and mark_unlearned
+    song.mark_learned()
+    assert song.learned is True
+    song.mark_unlearned()
+    assert song.learned is False
+
+    print("Song tests passed")
 
 
-run_tests()
+if __name__ == "__main__":
+    run_tests()
